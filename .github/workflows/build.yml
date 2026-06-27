@@ -111,10 +111,12 @@ jobs:
         export ASEPRITE=$PWD/build/bin/aseprite
         cd tests
         $XVFB bash run-tests.sh
-    - name: Upload Build Artifacts
-      if: always()
+    - name: Upload to Artifacts
+      if: success() 
       uses: actions/upload-artifact@v4
       with:
-        name: aseprite-${{ matrix.os }}-${{ matrix.ui }}-${{ matrix.scripting }}-${{ matrix.build_type }}
-        path: build/bin/
-        retention-days: 7
+          name: aseprite-${{ matrix.os }}-${{ matrix.ui }}-${{ matrix.scripting }}-${{ matrix.build_type }}
+          path: |
+            build/bin/aseprite
+            build/bin/aseprite.exe
+            build/bin/data/
